@@ -1,7 +1,13 @@
 module.exports = function() {
-
+  /**
+   * available streams 
+   * the id value is considered unique (provided by socket.io)
+   */
   var streamList = [];
 
+  /**
+   * Stream object
+   */
   var Stream = function(id, name) {
     this.name = name;
     this.id = id;
@@ -21,6 +27,7 @@ module.exports = function() {
       streamList.splice(index, 1);
     },
 
+    // update function
     update : function(id, name) {
       var stream = streamList.find(function(element, i, array) {
         return element.id == id;
