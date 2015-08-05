@@ -6,11 +6,15 @@ module.exports = function(io, streams) {
     client.emit('id', client.id);
 
     client.on('message', function (details) {
-      	var otherClient = io.sockets.connected[details.to];
+		var otherClient = io.sockets.connected[details.to];
+		var room = io.sockets.adapter.rooms[client.room];
 
-      	if (!otherClient && otherClient.room != 'r1') {
-      	  return;
+      	if (!otherClient && otherClient.room != room) {
+      		console.log('clients room: %s', otherClient.room);
+      		console.log('needed room: %s', room);
+      	  	return;
       	}
+
         delete details.to;
         details.from = client.id;
         //otherClient.emit('message', details);
@@ -24,6 +28,7 @@ module.exports = function(io, streams) {
       client.room = options.room;
       client.join(client.room);
       console.log('-- joined room: ' + client.room + ' --');
+      console.log(io.sockets.adapter.rooms[client.room]);
       
       streams.addStream(client.id, options.name);
     });
