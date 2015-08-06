@@ -3,7 +3,8 @@
  */
 var express = require('express')
 ,	path = require('path')
-,	streams = require('./app/streams.js')();
+,	streams = require('./app/streams.js')()
+,	rooms = require('./app/rooms.js')();
 
 
 var app = express();
@@ -23,4 +24,4 @@ var io = require('socket.io').listen(server);
 /**
  * Socket.io event handling
  */
-require('./app/socketHandler.js')(io, streams);
+require('./app/socketHandler.js')(io, streams, rooms);

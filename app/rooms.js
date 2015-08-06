@@ -1,35 +1,34 @@
 module.exports = function() {
 
-	var freeRoom = 0;
-	var roomSize = 2;
 	var roomList = [];
 
-	var Room = function(streams) {
-		this.id = ++freeRoom;
+	var Room = function(name, streams) {
+		this.name = name;
 		this.streams = streams;
 	}
 
 	return {
-		createRoom : function(streams) {
-			console.log('%s', JSON.stringify(streams));
+		addRoom : function(name, streams) {
+			console.log('streams: %s', JSON.stringify(streams));
 
-			var room = new Room(streams);
-			if (!containsObject(room, roomList) && roomList.length < roomSize) {
-				roomList.push(room);
-			}
+			var room = new Room(name, streams);
+			roomList.push(room);
+			//if (!containsObject(room, roomList) && roomList.length < roomSize) {
+			//	roomList.push(room);
+			//}
 		},
 
-		deleteRoom : function(id) {
+		deleteRoom : function(name) {
 			var index = 0;
-			while (index < roomList.length && roomList[index].id != id ) {
+			while (index < roomList.length && roomList[index].name != name ) {
 				index++;
 			}
 			roomList.splice(index, 1);
 		},
 
-		update : function(id, name) {
+		update : function(name, streams) {
 			var room = roomList.find(function(element, i, array) {
-				return element.id = id;
+				return element.name = name;
 			});
 		},
 
