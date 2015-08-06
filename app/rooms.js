@@ -8,11 +8,11 @@ module.exports = function() {
 	}
 
 	return {
-		addRoom : function(name, streams) {
+		addRoom : function(name) {
 			console.log('streams: %s', JSON.stringify(streams));
 
-			var room = new Room(name, streams);
-			roomList.push(room);
+			roomList.push(name);
+
 			//if (!containsObject(room, roomList) && roomList.length < roomSize) {
 			//	roomList.push(room);
 			//}
