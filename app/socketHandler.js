@@ -8,9 +8,6 @@ module.exports = function(io, streams, rooms) {
     client.on('message', function (details) {
 		  var otherClient = io.sockets.connected[details.to];
 
-      console.log("r: %s", client.id);
-      console.log("r: %s", otherClient.id);
-
       	if (!otherClient) {
       	  	return;
       	}
@@ -33,10 +30,8 @@ module.exports = function(io, streams, rooms) {
 
 
 
-      streams.addStream(client.id, options.name);
-
-
-
+      streams.addStream(client.id, options.name, JSON.stringify(client.room));
+      console.log(streams.getStreams());
 
 
 		var clients = io.sockets.adapter.rooms[client.room];
